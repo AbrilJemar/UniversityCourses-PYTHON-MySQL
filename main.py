@@ -20,15 +20,12 @@ def App():
             case 1:
                 Courses = DAO.listCourses()
                 
-                
                 if len(Courses) > 0:
-
                     Columns = DAO.listColumns()
                     functions.ListCourses(Courses, Columns)
 
                 else:
                     Exit = functions.GoBack()
-
                     if Exit == 2:
                         print('Thanks for using this program')
                         break  
@@ -38,7 +35,6 @@ def App():
                 
             ################################## Add a course #######################################
             case 2:
-                
                 Columns = DAO.listColumns()
                 NewCourse = functions.DataRegistration(Columns)
                 DAO.addCourse(NewCourse, Columns)    
@@ -92,9 +88,7 @@ def App():
             ################################## Modify columns ####################################
             case 6:
                 while True:
-
                     action = functions.Modify()
-                
                     match action:
                         case 1:
                             Column = input('Enter the name for the new column: ')
