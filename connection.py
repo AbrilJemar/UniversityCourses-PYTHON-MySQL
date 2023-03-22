@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 
 class DataAccessObject():
+    #Connects to the database
     def __init__(self):
         try:
             self.connection = mysql.connector.connect(
@@ -15,22 +16,28 @@ class DataAccessObject():
             print('Error trying to connect: {0}'.format(ex))
 
 
+
+    #Add a column
     def addcolumn(self, column):
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
                 cursor.execute(f'ALTER TABLE courses ADD COLUMN {column} varchar(100)')
+
                 print('COLUMN ADDED SUCCESSFULLY!')
 
             except Error as ex:
                 print('Error trying to connect: {0}' .format(ex))
 
 
+
+    #Delete a column
     def dropcolumn(self, column):
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
                 cursor.execute(f'ALTER TABLE courses DROP COLUMN {column}')
+
                 print('COLUMN DELETED SUCCESSFULLY!')
 
             except Error as ex:
@@ -38,8 +45,7 @@ class DataAccessObject():
 
 
 
-
-   #funcion para guardar la tupla columnas en una lista para poder moficarla(las tuplas son estaticas, no se pueden eliminar ni editar lo que tengan adentro)
+   #Takes existing columns and saves them in the "Columns" list
     def listColumns(self):
         if self.connection.is_connected():
             try:
@@ -57,7 +63,8 @@ class DataAccessObject():
                 print('Error trying to connect: {0}' .format(ex))
 
 
-    #funcion para obtener una tupla con los cursos que hay en la tabla courses 
+
+    #Gets a tuple with the existing courses
     def listCourses(self):
         if self.connection.is_connected():
             try:
@@ -71,19 +78,15 @@ class DataAccessObject():
                 print('Error trying to connect: {0}'.format(ex))
 
 
-
  
- #funcion para meter la lista que me dio funciones.DataRegistration() y la lista Columns que 
+    #Insert the course obtained in functions.DataRegistration() in tha table
     def addCourse(self, NewCourse, columns):
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
-                
-                
                 exe = ('INSERT INTO courses('+", ".join(columns)+') VALUES("'+'", "'.join(NewCourse)+'")')
                 cursor.execute(exe)
                 self.connection.commit()
-                
 
                 print('\nCOURSE ADDED SUCCESSFULLY! \n')
 
@@ -91,16 +94,15 @@ class DataAccessObject():
                 print('Error trying to connect: {0}'.format(ex))
 
 
+
+    #Delete the chosen course
     def deleteCourse(self, IdCourse):
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
-                
-                
                 exe = ('DELETE FROM courses WHERE id_course = "{0}"')
                 cursor.execute(exe.format(IdCourse))
                 self.connection.commit()
-                
 
                 print('\nCOURSE DELETED SUCCESSFULLY! \n')
 
