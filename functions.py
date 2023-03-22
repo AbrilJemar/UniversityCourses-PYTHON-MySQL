@@ -4,7 +4,7 @@ def ShowMenu():
 1) List courses.
 2) Add a new course.
 3) Edit a course.
-4) Delete a course.
+4) Remove a course.
 5) Search for a course.
 6) Modify a column.
 7) Exit.
@@ -27,7 +27,59 @@ def check_user_input(x):
     return (val)
 
 
-#lista lo que esta adentro de la table cursos, esta funcion tengo que modificarla para hacerla dinamica
+
+#Function for go back to main menu
+def GoBack():
+    Exit = input('''\nNo courses found. Go back to main menu?
+1) YES.
+2) NO.
+
+Choose an option: ''')
+    Exit = check_user_input(Exit)
+        
+    while(isinstance(Exit, str) or Exit not in [1,2]):
+        Exit = input("Invalid option. Try again: ")
+        Exit = check_user_input(Exit)    
+    
+    return Exit
+
+
+
+#Function to ask if the user is sure that he wants to remove a course
+def SureDelete():
+    sure = input('''Are you sure you want to remove a course?
+1) YES.
+2) NO.
+
+Choose an option: ''')
+    sure = check_user_input(sure)
+    while(isinstance(sure, str) or sure not in [1,2]):
+        sure = input("Invalid option. Try again: ")
+        sure = check_user_input(sure)    
+    
+    return sure
+
+
+
+#Function to ask what action the user wants to perform when modifying columns
+def Modify():
+    action = input('''\nWhat do you want to modify?:
+1) Add a new column.
+2) Delete a column.
+3) Go back to main menu.                          
+
+''')
+
+    action = check_user_input(action)
+    while(isinstance(action, str) or action not in [1,2,3]):
+        action = input("Invalid option. Try again: ")
+        action = check_user_input(action) 
+    
+    return action
+
+
+
+#Function to print the saved courses on the screen, taking the list "columns" and the tuple "courses"
 def ListCourses(courses, columns):
     print('\nTHESE ARE THE REGISTERED COURSES::')
     counter = 0
@@ -45,10 +97,9 @@ def ListCourses(courses, columns):
 
         print('\033[1m''\n\r========================================================== ''\033[0m')
 
-    
 
 
-#funcion para meter el regstro (se guarda en una lista "Course" la cual me devuelve para poder usarla en connection.py)
+#Function save the information of a new course in the "NewCourse" list, to use it in "connection.py"
 def DataRegistration(columns):
     print('\nThese are the columns to complete: ' + ", ".join(columns) + '\n')
     NewCourse = []
@@ -61,13 +112,13 @@ def DataRegistration(columns):
 
 
 
-
-
+#Function to ask the user which course he wants to edit
 def DataEditCourse():
-    print('Algo')
+    print('something')
 
 
 
+#Function to ask the user which course he wants to remove
 def DataDeleteCourse(courses, columns):
     print('\nTHESE ARE THE REGISTERED COURSES:')
     counter = 0
@@ -89,11 +140,9 @@ def DataDeleteCourse(courses, columns):
     NumberCourse = check_user_input(NumberCourse)
     
     num = counter + 1
-
     while(isinstance(NumberCourse, str) or NumberCourse not in range(1, num)):
         NumberCourse = input("Invalid option. Try again: ")
         NumberCourse = check_user_input(NumberCourse)
-
 
     count = 0
     for cour in courses:
@@ -103,7 +152,6 @@ def DataDeleteCourse(courses, columns):
             IdCourse = cour[0]
             break
     
-    print(IdCourse)
     return IdCourse
 
 
