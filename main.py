@@ -138,14 +138,7 @@ Choose an option: ''')
                     match action:
                         case 1:
                             Column = input('Enter the name for the new column: ')
-                            Size = input(f'Enter the number of characters for {Column}: ')
-                            Size = functions.check_user_input(Size) 
-                            
-                            while(isinstance(Size, str)):
-                                Size = input("Invalid option. Try again: ")
-                                Size = functions.check_user_input(Size) 
-                            
-                            DAO.addcolumn(Column, Size)
+                            DAO.addcolumn(Column)
 
                         case 2:
                             Column = input('Which column are you going to delete?: ')
