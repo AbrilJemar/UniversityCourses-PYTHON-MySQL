@@ -7,7 +7,7 @@ class DataAccessObject():
             self.connection = mysql.connector.connect(
                 host='localhost',
                 user='root',
-                password='SamueldeLuque777',
+                password='YourPassword',
                 db='university' 
             )
         
@@ -19,7 +19,7 @@ class DataAccessObject():
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
-                cursor.execute(f'ALTER TABLE courses ADD COLUMN {column} varchar({Size})')
+                cursor.execute(f'ALTER TABLE courses ADD COLUMN {column} varchar(100)')
                 print('COLUMN ADDED SUCCESSFULLY!')
 
             except Error as ex:
