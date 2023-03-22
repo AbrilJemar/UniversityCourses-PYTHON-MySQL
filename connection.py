@@ -15,7 +15,7 @@ class DataAccessObject():
             print('Error trying to connect: {0}'.format(ex))
 
 
-    def addcolumn(self, column, Size):
+    def addcolumn(self, column):
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
