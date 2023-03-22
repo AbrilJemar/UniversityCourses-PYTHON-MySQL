@@ -4,4 +4,4 @@ In this opportunity i created a program for the administration of a database of 
 
 The program lets the user list, add, remore and edit courses in the database. The edition tool can be used to add or delete columns from the "courses" table using dynamic queries to allow for automatic updating of existing functionalities.
 
-Anyone who wants to test my code can generate test data by running all the queries located in "courses.sql" and correcting the line 11 in "connections.py".
+Anyone who wants to test my code can generate test data by running all the queries located in "courses.sql" and correcting the line 11 in "connections.py" with your password of your user "root".
