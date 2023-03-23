@@ -93,7 +93,40 @@ class DataAccessObject():
             except Error as ex:
                 print('Error trying to connect: {0}'.format(ex))
 
+                
+                
+    #Edit the selected course with the data entered            
+    def editCourse(self, idcourse, course, columns):
+        if self.connection.is_connected():
+            try:
+                counter = 0
+                for i in range(len(columns)):
+                    if i != 0:
+                        cursor = self.connection.cursor()
+                        exe = ('UPDATE courses SET ' + columns[i] + ' = "'  + course[counter] + '" WHERE id_course = "'  + idcourse + '"')
+                        cursor.execute(exe)
+                        self.connection.commit()
+                        counter = counter + 1
 
+                print('\nCOURSE EDITED SUCCESSFULLY! \n')        
+                
+                print('\033[1m'"THAT'S HOW IT'S SAVED: "'\033[0m')
+                cursor.execute('SELECT * FROM courses WHERE id_course = "' + idcourse + '"')
+                course = cursor.fetchall()
+                coun = 0
+                print('\033[1m''========================================================== ''\033[0m')
+                for cour in course:
+                    for cou in cour:
+                        data = ("◦ " + columns[coun] + ": " + str(cou))
+                        print(data)
+                        coun = coun + 1
+
+                print('\033[1m''========================================================== ''\033[0m')
+        
+            except Error as ex:
+                print('Error trying to connect: {0}'.format(ex))
+
+                
 
     #Delete the chosen course
     def deleteCourse(self, IdCourse):
