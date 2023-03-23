@@ -116,6 +116,61 @@ def DataRegistration(columns):
 def DataEditCourse():
     print('something')
 
+    
+    
+    
+#Function to ask the user which course he wants to edit
+def IdEditCourse(courses, columns):
+    print('\nTHESE ARE THE REGISTERED COURSES:')
+    counter = 0
+
+    #The courses are listed so that the user can see and choose them
+    print('\033[1m''\n========================================================== ''\033[0m')
+    for cour in courses:
+        counter = counter + 1
+        coun = 0
+        print(f'\033[1m''COURSE NUMBER ' + str(counter) + '\033[0m')
+        for cou in cour:
+            
+            data = ("◦ " + columns[coun] + ": " + str(cou))
+            print(data)
+            coun = coun + 1
+
+        print('\033[1m''\n\r========================================================== ''\033[0m')
+    
+    #User is prompted to choose a course
+    NumberCourse = input(f'''\nEnter the number of the course you want to edit (from 1 to {counter}): ''')
+    NumberCourse = check_user_input(NumberCourse)
+    
+    num = counter + 1
+    while(isinstance(NumberCourse, str) or NumberCourse not in range(1, num)):
+        NumberCourse = input("Invalid option. Try again: ")
+        NumberCourse = check_user_input(NumberCourse)
+
+    #With the number of the course that was chosen, the course id is saved
+    count = 0
+    for cour in courses:
+        count = count + 1
+            
+        if count == NumberCourse:
+            IdCourse = cour[0]
+            break
+
+    return IdCourse
+
+
+
+#The new course information is saved in the "New Information" list.
+def DataEditCourse(columns):
+    NewInformation = []
+    print('')
+    for i in range(len(columns)):
+        if i != 0:
+            regist = input(f'Enter the new {columns[i]}: ')
+            NewInformation.append(regist)       
+        
+    return NewInformation
+
 
 
 #Function to ask the user which course he wants to remove
