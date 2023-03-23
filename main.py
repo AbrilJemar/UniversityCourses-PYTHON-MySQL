@@ -45,7 +45,19 @@ def App():
             ################################## Edit a course ######################################
             case 3:
                 try:
-                     #it's not ready yet
+                    courses = DAO.listCourses()
+                    if len(courses) > 0:
+                        columns = DAO.listColumns()
+                        IdCourse = functions.IdEditCourse(courses, columns)
+                        NewInformation = functions.DataEditCourse(columns)
+                        DAO.editCourse(IdCourse, NewInformation, columns)
+
+                    else:
+                        Exit = functions.GoBack()
+                        if Exit == 2:
+                            print('Thanks for using this program')
+                            break
+
                 except:
                     print('ERROR')
 
