@@ -36,7 +36,6 @@ def GoBack():
 
 Choose an option: ''')
     Exit = check_user_input(Exit)
-        
     while(isinstance(Exit, str) or Exit not in [1,2]):
         Exit = input("Invalid option. Try again: ")
         Exit = check_user_input(Exit)    
